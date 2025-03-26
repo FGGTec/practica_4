@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color:cadetblue;">
+<head>
+    <title>Inicio</title>
+    <h1>Inicio</h1>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body { font-family: "Comic Sans MS", "Comic Sans", cursive; color: #333; }
+    </style>
+    <nav style="background-color:whitesmoke; padding: 0px; width: fit-content;">
+        <h4 style="padding: 5px;">Menu de navegacion:</h4>
+        <ul style="padding-left: 20px; padding-bottom: 5px;">
+            <li><a href="{{url_for('i')}}">Inicio</a></li>
+            <li><a href="{{url_for('sm')}}">Sobre mí</a></li>
+            <li><a href="{{url_for('p')}}">Portafolio</a></li>
+            <li><a href="{{url_for('b')}}">Blog</a></li>
+            <li><a href="{{url_for('c')}}">Contacto</a></li>
+        </ul>
+    </nav>
+</head>
+<body style="background-color: antiquewhite; padding: 8px;">
+    <h3 style="color: chocolate;">Presentación Breve</h3>
+    <h2>h2</h2>
+    <h4>Hola, mi nombre es Felipe. Soy de la carrera de 
+        <span style="color: dodgerblue;">Ingenieria en Sistemas Computacionales</span>
+         y me encuentro cursando la materia de <i>Programacion Web</i>.</h2>
+    <div>Quisiera darles la bienvenida a seguirme en una exploracion a detalle de esta pagina, creada por su servidor.</div>
+    <p>Espero que disfruten recorrer mi pagina tanto como a mi me gusto crearla!</p>
+    <img src="../../static/imgs/perritochill.jpg" alt=:) width="400px">
+</body>
+</html>

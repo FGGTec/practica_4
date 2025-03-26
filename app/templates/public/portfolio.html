@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color:cadetblue;">
+<head>
+    <title>Portafolio</title>
+    <h1>Portafolio</h1>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: "Comic Sans MS", "Comic Sans", cursive; color: #333; }
+    </style>
+    <nav style="background-color:whitesmoke; padding: 0px; width: fit-content;">
+        <h4 style="padding: 5px;">Menu de navegacion:</h4>
+        <ul style="padding-left: 20px; padding-bottom: 5px;">
+            <li><a href="{{url_for('i')}}">Inicio</a></li>
+            <li><a href="{{url_for('sm')}}">Sobre mí</a></li>
+            <li><a href="{{url_for('p')}}">Portafolio</a></li>
+            <li><a href="{{url_for('b')}}">Blog</a></li>
+            <li><a href="{{url_for('c')}}">Contacto</a></li>
+        </ul>
+    </nav>
+</head>
+<body style="background-color: antiquewhite; padding: 8px;">
+    <h3 style="color: chocolate;">Proyectos realizados</h3>
+    <ol>
+        <li><p><strong>Vigenère en Haskell: </strong>
+        Un codigo de Haskell que utiliza cifrado de vigenère para codificar/decodificar un texto con ayuda de una <i>palabra clave</i></p></li>
+        <a target="_blank" href="../recursos extra/Codigos Vigenere haskell.txt"><img src="../../static/imgs/cifradovigenere.png" width="300"></a>
+        <li><p><strong>Añadir Dia a Mes/Dia/Año en Java: </strong>
+        Un codigo de Java donde ingresas una fecha, en dia, mes y año, y te devuelve la fecha del dia siguiente</p></li>
+        <a target="_blank" href="../recursos extra/AniadirFecha en java.txt"><img src="../../static/imgs/aniadirmesdiaanio.png" width="300"></a>
+    </ol>
+</body>
+</html>

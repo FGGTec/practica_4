@@ -1,0 +1,203 @@
+--matriz alfabeto
+alphabetMatrix :: [[Char]]
+alphabetMatrix = [ [cycle ['A'..'Z'] !! (i + j) | j <- [0..25]] | i <- [0..25]]
+
+printMatrix :: [[Char]] -> IO ()
+printMatrix [] = return ()
+printMatrix (row:rows) = do
+    putStrLn $ unwords (map (\c -> [c]) row)
+    printMatrix rows
+
+main :: IO ()
+main = printMatrix alphabetMatrix
+
+_________________________________________________________________________________________________________________
+
+--encriptado vigenere 1
+-- module Main where
+import Data.Char (ord, chr, isUpper, isLower)
+-- Función para cifrar un texto usando el cifrado Vigenère
+vigenereEncrypt :: String -> String -> String
+vigenereEncrypt text key = zipWith encryptChar text (cycle key)
+  where
+    encryptChar t k
+      | isUpper t && isUpper k = shiftChar t (ord k - ord 'A')
+      | isLower t && isLower k = shiftChar t (ord k - ord 'a')
+      | otherwise = t
+
+    shiftChar c shift = chr (((ord c - base c + shift) `mod` 26) + base c)
+    base c
+      | isUpper c = ord 'A'
+      | isLower c = ord 'a'
+      | otherwise = ord c
+-- Función para descifrar un texto cifrado usando el cifrado Vigenère
+vigenereDecrypt :: String -> String -> String
+vigenereDecrypt text key = zipWith decryptChar text (cycle key)
+  where
+    decryptChar t k
+      | isUpper t && isUpper k = shiftChar t (negate (ord k - ord 'A'))
+      | isLower t && isLower k = shiftChar t (negate (ord k - ord 'a'))
+      | otherwise = t
+
+    shiftChar c shift = chr (((ord c - base c + shift) `mod` 26) + base c)
+    base c
+      | isUpper c = ord 'A'
+      | isLower c = ord 'a'
+      | otherwise = ord c
+-- Ejecucion
+main :: IO ()
+main = do
+    let text = "we're giving"
+    let key = "gift"
+    let encrypted = vigenereEncrypt text key
+    let decrypted = vigenereDecrypt encrypted key
+    putStrLn $ "Texto original: " ++ text
+    putStrLn $ "Texto clave: " ++ key
+    putStrLn $ "Texto cifrado: " ++ encrypted
+    putStrLn $ "Texto descifrado: " ++ decrypted
+
+_________________________________________________________________________________________________________________
+
+--encriptado vigenere 2
+-- module Main where
+import Data.Char (ord, chr, isUpper, isLower, isAlpha)
+-- Filtra los caracteres especiales y espacios en blanco
+filterText :: String -> String
+filterText = filter isAlpha
+-- Función para cifrar un texto usando el cifrado Vigenère
+vigenereEncrypt :: String -> String -> String
+vigenereEncrypt text key = zipWith encryptChar (filterText text) (cycle key)
+  where
+    encryptChar t k
+      | isUpper t && isUpper k = shiftChar t (ord k - ord 'A')
+      | isLower t && isLower k = shiftChar t (ord k - ord 'a')
+      | otherwise = t
+
+    shiftChar c shift = chr (((ord c - base c + shift) `mod` 26) + base c)
+    base c
+      | isUpper c = ord 'A'
+      | isLower c = ord 'a'
+      | otherwise = ord c
+-- Función para descifrar un texto cifrado usando el cifrado Vigenère
+vigenereDecrypt :: String -> String -> String
+vigenereDecrypt text key = zipWith decryptChar (filterText text) (cycle key)
+  where
+    decryptChar t k
+      | isUpper t && isUpper k = shiftChar t (negate (ord k - ord 'A'))
+      | isLower t && isLower k = shiftChar t (negate (ord k - ord 'a'))
+      | otherwise = t
+
+    shiftChar c shift = chr (((ord c - base c + shift) `mod` 26) + base c)
+    base c
+      | isUpper c = ord 'A'
+      | isLower c = ord 'a'
+      | otherwise = ord c
+-- Ejecución
+main :: IO ()
+main = do
+    let text = "WE'RE GIVING"
+    let key = "GIFT"
+    let encrypted = vigenereEncrypt text key
+    let decrypted = vigenereDecrypt encrypted key
+    putStrLn $ "Texto original: " ++ text
+    putStrLn $ "Texto clave: " ++ key
+    putStrLn $ "Texto cifrado: " ++ encrypted
+    putStrLn $ "Texto descifrado: " ++ decrypted
+
+_________________________________________________________________________________________________________________
+
+--encriptado vigenere 3
+-- module Main where
+import Data.Char (ord, chr, isUpper, isLower, isAlpha)
+-- Filtra los caracteres especiales y espacios en blanco
+filterText :: String -> String
+filterText = filter isAlpha
+-- Función para cifrar un texto usando el cifrado Vigenère
+vigenereEncrypt :: String -> String -> String
+vigenereEncrypt text key = mergeText text (zipWith encryptChar filteredText (cycle key))
+  where
+    filteredText = filterText text
+    encryptChar t k
+      | isUpper t && isUpper k = shiftChar t (ord k - ord 'A')
+      | isLower t && isLower k = shiftChar t (ord k - ord 'a')
+      | otherwise = t
+
+    shiftChar c shift = chr (((ord c - base c + shift) `mod` 26) + base c)
+    base c
+      | isUpper c = ord 'A'
+      | isLower c = ord 'a'
+      | otherwise = ord c
+-- Función para descifrar un texto cifrado usando el cifrado Vigenère
+vigenereDecrypt :: String -> String -> String
+vigenereDecrypt text key = mergeText text (zipWith decryptChar filteredText (cycle key))
+  where
+    filteredText = filterText text
+    decryptChar t k
+      | isUpper t && isUpper k = shiftChar t (negate (ord k - ord 'A'))
+      | isLower t && isLower k = shiftChar t (negate (ord k - ord 'a'))
+      | otherwise = t
+
+    shiftChar c shift = chr (((ord c - base c + shift) `mod` 26) + base c)
+    base c
+      | isUpper c = ord 'A'
+      | isLower c = ord 'a'
+      | otherwise = ord c
+
+-- Función para insertar caracteres especiales y espacios en blanco en sus posiciones originales
+mergeText :: String -> String -> String
+mergeText [] _ = []
+mergeText (x:xs) ys
+  | isAlpha x = head ys : mergeText xs (tail ys)
+  | otherwise = x : mergeText xs ys
+-- Ejecución
+main :: IO ()
+main = do
+    let text = "WE'RE GIVING Tom a voucher for his birthday"
+    let key = "gift"
+    let encrypted = vigenereEncrypt text key
+    let decrypted = vigenereDecrypt encrypted key
+    putStrLn $ "Texto original: " ++ text
+    putStrLn $ "Texto clave: " ++ key
+    putStrLn $ "Texto cifrado: " ++ encrypted
+    putStrLn $ "Texto descifrado: " ++ decrypted
+
+_________________________________________________________________________________________________________________
+
+--encriptado vigenere 4 final
+import Data.Char (ord, chr, isUpper, isLower, isAlpha, toUpper)
+-- Filtra los caracteres especiales y espacios en blanco y los vuelve mayúsculas
+filterText :: String -> String
+filterText = map toUpper . filter isAlpha
+-- Función para cifrar un texto usando codificacion de Vigenère
+vigenereEncrypt :: String -> String -> String
+vigenereEncrypt text key = mergeText text (zipWith encryptChar filteredText (cycle filteredKey))
+  where
+    filteredText = filterText text
+    filteredKey = map toUpper key
+    encryptChar t k = shiftChar t (ord k - ord 'A')
+    shiftChar c shift = chr (((ord c - ord 'A' + shift) `mod` 26) + ord 'A')
+-- Función para insertar caracteres especiales y espacios en blanco en sus posiciones originales
+mergeText :: String -> String -> String
+mergeText [] _ = []
+mergeText (x:xs) ys | isAlpha x = head ys : mergeText xs (tail ys) | otherwise = x : mergeText xs ys
+-- Matriz del alfabeto
+alphabetMatrix :: [[Char]]
+alphabetMatrix = [ [cycle ['A'..'Z'] !! (i + j) | j <- [0..25]] | i <- [0..25]]
+-- Imprimir la matriz (con espacios entre las letras)
+printMatrix :: [[Char]] -> IO ()
+printMatrix [] = return ()
+printMatrix (row:rows) = do
+    putStrLn $ unwords (map (\c -> [c]) row)
+    printMatrix rows
+-- Ejecución
+main :: IO ()
+main = do
+    let text = "We're giving Tom a voucher for his birthday!"
+    let key = "gift"
+    let encrypted = vigenereEncrypt text key
+    putStrLn "Codificacion/Encriptacion de Vigenere\n"
+    putStrLn "\nLa matriz del alfabeto:"
+    printMatrix alphabetMatrix
+    putStrLn "vertical = Letras de texto, horizontal = Letras de clave\n"
+    putStrLn $ "Texto original: " ++ text
+    putStrLn $ "Texto clave: " ++ key

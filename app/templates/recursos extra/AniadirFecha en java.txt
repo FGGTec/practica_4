@@ -1,0 +1,54 @@
+package cosasRandom;
+import javax.swing.JOptionPane;
+public class FechaMesAnio
+{//Crear un programa que capture una fecha (dia/mes/anio), a partir de esta calcula la fecha del dia siguiente
+	public static void main(String[] args)
+	{//ni=ñ, febrero es de 28 dias, meses de 30 dias: abril, junio, septiembre y noviembre
+		int Dia, Mes, Anio, dia=0, mes=0, anio=0;//la variable anio no se necesita, solo se debe reemplazar por Anio
+		String Fecha, newFecha;
+		Dia=Integer.parseInt(JOptionPane.showInputDialog("Introduzca el dia: "));
+		if(Dia<=31)	dia=Dia;
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Ningun mes tiene mas de 31 dias");
+			dia=Dia;
+		}
+		Mes=Integer.parseInt(JOptionPane.showInputDialog("Introduzca el mes: "));
+		if(Mes<=12)	mes=Mes;
+		else
+		{
+			JOptionPane.showMessageDialog(null, "No hay mas de 12 meses");
+			mes=Mes;
+		}
+		if(Mes==2&&Dia>28)
+			JOptionPane.showMessageDialog(null, "Febrero solo tiene 28 dias (en no bisiesto)");
+		if((Mes==4||Mes==6||Mes==9||Mes==11)&&Dia>30)
+			JOptionPane.showMessageDialog(null, "Este mes solo tiene 30 dias");
+		Anio=Integer.parseInt(JOptionPane.showInputDialog("Introduzca el anio: "));	anio=Anio;
+		Fecha=dia+"/"+mes+"/"+anio;
+		JOptionPane.showMessageDialog(null, "La fecha de actual es: "+Fecha);
+		dia++;
+		if(dia>31&&(mes!=2||mes!=4|mes!=6||mes!=9||mes!=11))
+		{
+			dia=1;
+			mes++;
+		}
+		if((mes==4||mes==6||mes==9||mes==11)&&dia>30)
+		{
+			dia=1;
+			mes++;
+		}
+		if (mes==2&&dia>28)
+		{
+			dia=1;
+			mes++;
+		}
+		if(mes>12)
+		{
+			mes=1;
+			anio++;
+		}
+		newFecha=dia+"/"+mes+"/"+anio;
+		JOptionPane.showMessageDialog(null, "La fecha del dia siguiente es: "+newFecha);
+	}//main
+}//class

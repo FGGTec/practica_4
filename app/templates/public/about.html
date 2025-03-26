@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color:cadetblue;">
+<head>
+    <title>Sobre mí</title>
+    <h1>Sobre mí</h1>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/styles.css">
+    <style>
+        body { font-family: "Comic Sans MS", "Comic Sans", cursive; color: #333; }
+    </style>
+    <nav style="background-color:whitesmoke; padding: 0px; width: fit-content;">
+        <h4 style="padding: 5px;">Menu de navegacion:</h4>
+        <ul style="padding-left: 20px; padding-bottom: 5px;">
+            <li><a href="{{url_for('i')}}">Inicio</a></li>
+            <li><a href="{{url_for('sm')}}">Sobre mí</a></li>
+            <li><a href="{{url_for('p')}}">Portafolio</a></li>
+            <li><a href="{{url_for('b')}}">Blog</a></li>
+            <li><a href="{{url_for('c')}}">Contacto</a></li>
+        </ul>
+    </nav>  
+</head>
+<body style="background-color: antiquewhite; padding: 8px;">
+    <h3 style="color: chocolate;">Mi información ""detallada""</h3>
+    <table border="4">
+        <tr><th>Nombre</th><th>Edad</th><th>Nacionalidad</th></tr>
+        <tr><td>Felipe García González</td><td>21 años (sep/2003)</td><td><strong><span style="color: red;">Esta</span><span style="color: rgb(189, 187, 187);">douni</span><span style="color: blue;">dense</span></strong></td></tr>
+        <tr><th>Hobbies</th><th>Estudios</th><th>Intereses</th></tr>
+        <tr><td>Tocar el bajo, armar <span style="color: rgb(203, 203, 43);">LEGOs</span></td><td>Quimica y Sistemas</td><td>Rap, <i>hip-hop</i></td></tr>
+    </table>
+    <h2><i>'border-collapse: collapse;' sirve para unificar las lineas de los recuadros de las tablas</i></h2>
+</body>
+</html>
